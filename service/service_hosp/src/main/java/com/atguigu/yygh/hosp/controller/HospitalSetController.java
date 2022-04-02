@@ -1,5 +1,6 @@
 package com.atguigu.yygh.hosp.controller;
 
+import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.result.Result;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.HospitalSet;
@@ -23,6 +24,8 @@ import com.atguigu.yygh.common.util.MD5;
 import java.util.List;
 import java.util.Random;
 
+import static com.atguigu.yygh.common.result.ResultCodeEnum.*;
+
 @Api("医院制度管理")
 @RestController
 @RequestMapping("admin/hosp/hospitalSet")
@@ -38,6 +41,12 @@ public class HospitalSetController {
 	public Result findAllHospitalSet(){
 		// mp在service中的封装
 		List<HospitalSet> list = hospitalSetService.list();
+		try {
+			// int a = 1 / 0;
+		}catch(Exception e){
+			// 需要手动抛出异常
+			throw new YyghException(SERVICE_ERROR);
+		}
 		// 会把list 转化成json，利用jeckson
 		return Result.ok(list);
 	}
