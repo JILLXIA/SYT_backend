@@ -108,7 +108,7 @@ public class HospitalSetController {
 
 	}
 	// 5. 根据id 找医院
-	@GetMapping("getHospitalSet")
+	@GetMapping("getHospitalSet/{id}")
 	public Result getHospitalSet(@PathVariable Long id){
 		return Result.ok(hospitalSetService.getById(id));
 	}
