@@ -22,7 +22,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 			Long dictId = dict.getId();
 			dict.setHasChildren(this.isChild(dictId));
 		}
-		return baseMapper.selectList(queryWrapper);
+		return list;
 	}
 
 	// 判断id下面是否有子节点
