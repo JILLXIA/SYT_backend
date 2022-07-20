@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api(value="数据字典接口")
@@ -22,6 +25,21 @@ import java.util.List;
 public class DictController {
 	@Autowired
 	private DictService dictService;
+
+	// 导入数据字典
+	@PostMapping("importData")
+	public Result importDict(MultipartFile file){
+		// multipartfile 用于得到传的文件
+		dictService.importDictData(file);
+		return Result.ok();
+	}
+
+	// 导出数据字典的方法
+	@GetMapping("exportData")
+	public void exportDict(HttpServletResponse response){
+		// 用户自定义路径下载
+		dictService.exportDictData(response);
+	}
 
 	// 根据数据id查询子数据
 	@ApiOperation(value="根据数据id查询子数据")
