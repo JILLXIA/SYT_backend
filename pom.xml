@@ -7,6 +7,7 @@
         <module>module</module>
         <module>service</module>
         <module>service_hosp</module>
+        <module>hospital-manage</module>
     </modules>
     <dependencies>
         <dependency>
