@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +74,23 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 			EasyExcel.read(multipartFile.getInputStream(),DictEeVo.class,new DictListener(baseMapper)).sheet().doRead();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getDictName(String dictCode, String value) {
+		if(StringUtils.isEmpty(dictCode)){
+			QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+			queryWrapper.eq("value",value);
+			return baseMapper.selectOne(queryWrapper).getName();
+		} else {
+			QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+			queryWrapper.eq("dict_code",dictCode);
+			long parentID = baseMapper.selectOne(queryWrapper).getId();
+			QueryWrapper<Dict> query = new QueryWrapper<>();
+			query.eq("parent_id",parentID);
+			query.eq("value",value);
+			return baseMapper.selectOne(query).getName();
 		}
 	}
 
