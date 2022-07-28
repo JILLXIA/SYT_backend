@@ -1,4 +1,4 @@
-package com.atguigu.hospital.util;
+package com.atguigu.yygh.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +46,6 @@ public final class HttpUtil {
 	 */
 	public static byte[] send(String strUrl, String reqmethod, byte[] reqData) {
 		try {
-			System.out.println("strUrl" + strUrl);
 			URL url = new URL(strUrl);
 			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
 			httpcon.setDoOutput(true);
