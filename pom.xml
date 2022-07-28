@@ -10,6 +10,7 @@
         <module>hospital-manage</module>
         <module>service_client</module>
         <module>service_client</module>
+        <module>service_client</module>
     </modules>
     <dependencies>
         <dependency>
